@@ -53,3 +53,26 @@ form label {
     display: block;
     margin-top: 0.5em;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button.edit, button.delete {
+    margin-left: 10px;
+}
