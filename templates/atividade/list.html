@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Atividades</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div id="container">
+        <div th:replace="fragments/nav :: nav"></div>
+        <main>
+            <h2>Lista de Atividades</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+                <tr th:each="atividade : ${atividades}">
+                    <td th:text="${atividade.id}"></td>
+                    <td th:text="${atividade.nome}"></td>
+                    <td th:text="${atividade.descricao}"></td>
+                    <td>
+                        <a th:href="@{/atividade/form/{id}(id=${atividade.id})}">Editar</a>
+                        <a th:href="@{/atividade/delete/{id}(id=${atividade.id})}" onclick="return confirm('Tem certeza que deseja excluir esta atividade?');">Excluir</a>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

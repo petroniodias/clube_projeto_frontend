@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Sócios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div id="container">
+        <div th:replace="fragments/nav :: nav"></div>
+        <main>
+            <h2>Lista de Sócios</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+                <tr th:each="socio : ${socios}">
+                    <td th:text="${socio.id}"></td>
+                    <td th:text="${socio.nome}"></td>
+                    <td>
+                        <a th:href="@{/socio/form/{id}(id=${socio.id})}">Editar</a>
+                        <a th:href="@{/socio/delete/{id}(id=${socio.id})}" onclick="return confirm('Tem certeza que deseja excluir este sócio?');">Excluir</a>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

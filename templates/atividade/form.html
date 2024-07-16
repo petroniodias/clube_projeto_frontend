@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${atividade != null ? 'Editar Atividade' : 'Adicionar Atividade'}">Adicionar Atividade</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div id="container">
+        <div th:replace="fragments/nav :: nav"></div>
+        <main>
+            <h2 th:text="${atividade != null ? 'Editar Atividade' : 'Adicionar Atividade'}">Adicionar Atividade</h2>
+            <form th:action="@{/atividade}" th:object="${atividade}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required><br>
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" th:field="*{descricao}" required><br>
+                <button type="submit">Salvar</button>
+            </form>
+        </main>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
