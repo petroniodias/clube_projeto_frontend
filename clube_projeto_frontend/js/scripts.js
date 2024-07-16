@@ -20,47 +20,49 @@ function loadPage(page) {
             .then(response => response.text())
             .then(data => {
                 contentDiv.innerHTML = data;
-                loadProducts();
+                loadAtividades();
             });
     } else if (page === 'add') {
-        let formSection = document.getElementById('product-form');
-        formSection.style.display = 'block';
-        let listSection = document.getElementById('product-list');
-        listSection.style.display = 'none';
+        fetch('partials/main.html')
+            .then(response => response.text())
+            .then(data => {
+                contentDiv.innerHTML = data;
+                document.getElementById('atividade-form').style.display = 'block';
+                document.getElementById('atividade-list').style.display = 'none';
+            });
     }
 }
 
-function loadProducts() {
-    fetch('/produtos')
+function loadAtividades() {
+    fetch('/atividade')
         .then(response => response.json())
-        .then(products => {
-            let productList = document.getElementById('product-list');
-            productList.innerHTML = '<h2>Lista de Produtos</h2>';
-            products.forEach(product => {
-                let productItem = document.createElement('div');
-                productItem.innerHTML = `ID: ${product.id}, Descrição: ${product.descricao}, Unidade: ${product.unidade}, Preço: ${product.preco}`;
-                productList.appendChild(productItem);
+        .then(atividades => {
+            let atividadeList = document.getElementById('atividade-list');
+            atividadeList.innerHTML = '<h2>Lista de Atividades</h2>';
+            atividades.forEach(atividade => {
+                let atividadeItem = document.createElement('div');
+                atividadeItem.innerHTML = `ID: ${atividade.id}, Nome: ${atividade.nome}, Descrição: ${atividade.descricao}`;
+                atividadeList.appendChild(atividadeItem);
             });
         });
 }
 
 document.addEventListener('submit', function(event) {
     event.preventDefault();
-    if (event.target && event.target.id === 'formProduto') {
+    if (event.target && event.target.id === 'formAtividade') {
+        let nome = document.getElementById('nome').value;
         let descricao = document.getElementById('descricao').value;
-        let unidade = document.getElementById('unidade').value;
-        let preco = document.getElementById('preco').value;
 
-        fetch('/produtos', {
+        fetch('/atividade', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ descricao, unidade, preco })
+            body: JSON.stringify({ nome, descricao })
         })
         .then(response => response.json())
         .then(data => {
-            alert('Produto adicionado com sucesso');
+            alert('Atividade adicionada com sucesso');
             loadPage('main');
         });
     }

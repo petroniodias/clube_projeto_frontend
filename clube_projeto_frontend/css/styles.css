@@ -14,9 +14,16 @@ header, footer {
     padding: 1em;
 }
 
+#container {
+    display: flex;
+    flex: 1;
+}
+
 nav {
     background-color: #f4f4f4;
     padding: 1em;
+    width: 200px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 nav ul {
@@ -25,8 +32,12 @@ nav ul {
 }
 
 nav ul li {
-    display: inline;
-    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
 }
 
 main {
